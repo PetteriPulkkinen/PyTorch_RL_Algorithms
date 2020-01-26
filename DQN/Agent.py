@@ -59,7 +59,7 @@ class DQN(object):
             ep_reward += reward
             obs = next_obs
 
-            if self.memory.size >= self.n_batch and self.start_learning:
+            if self.memory.size >= self.n_batch and (self.memory.size >= self.start_learning):
                 loss = self._train()
                 if i_step % self.n_update_target == 0:
                     self._update_target()
@@ -122,9 +122,6 @@ class DQN(object):
         sd = torch.load('dqn_agent.pth')
         self.critic.load_state_dict(sd)
         self.target_critic.load_state_dict(sd)
-
-
-
 
 
 if __name__ == '__main__':
